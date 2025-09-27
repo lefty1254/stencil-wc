@@ -1,0 +1,15 @@
+<div class="algo-card">
+    <div class="controls">
+        <label>
+            Low
+            <input type="range" min="0" max="255" [value]="low()" (input)="low.set(+$any($event.target).value)" />
+        </label>
+        <label>
+            High
+            <input type="range" min="0" max="255" [(ngModel)]="high" />
+        </label>
+    </div>
+    @if(outputUrl() ) {
+    <img  [src]="url()" alt="Canny output" />
+    }
+</div>

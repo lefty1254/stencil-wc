@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Workbench } from "./features/workbench/workbench";
+
+declare const cv: any; // from opencv.js
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ Workbench],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('stencil-wc');
+  
 }

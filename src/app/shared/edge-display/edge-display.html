@@ -1,0 +1,8 @@
+@if(ar()) {
+<div class="stage" [style.aspect-ratio]="ar()">
+    <img class="base" [src]="baseUrl()!" [alt]="alt()" />
+    @if(overlayUrl()) {
+    <img class="overlay" [src]="overlayUrl()!" alt="" />
+    }
+</div>
+}

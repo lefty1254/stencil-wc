@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">Stencil Workbench</mat-toolbar>
+
+<section class="container">
+    <div class="uploader">
+        <input type="file" accept="image/*" (change)="onFile($event)" />
+        <button mat-stroked-button (click)="img.clear()">Clear</button>
+    </div>
+
+    @if(img.size()!== null) {
+        @let s = img.size()!;
+        <div class="grid" >
+            <mat-card>
+                <mat-card-header><mat-card-title>Original</mat-card-title></mat-card-header>
+                <mat-card-content>
+                    <edge-display [baseImage]="img.src()" [overlayImage]="null" [size]="s" alt="Original"></edge-display>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card>
+                <mat-card-header><mat-card-title>Grayscale</mat-card-title></mat-card-header>
+                <mat-card-content>
+                    <edge-display [baseImage]="img.grayRes.hasValue() ? img.grayRes.value() : null" [overlayImage]="null"
+                        [size]="s" alt="Grayscale"></edge-display>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    }
+</section>
