@@ -1,7 +1,34 @@
+.panel {
+    display: grid;
+    gap: 12px;
+}
+
+/* Controls stacked vertically; never overflow image unless the image is narrower than our min */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-inline-size: min(var(--disp-min-w), calc(var(--seed-w) * 1px));
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .stage {
     position: relative;
-    width: 100%;
-    max-width: 100%;
+    border-radius: 8px;
+
+    /* Keep original aspect ratio */
+    aspect-ratio: calc(var(--seed-w) / var(--seed-h));
+
+    /* Never render wider than seed native width; otherwise fill container width */
+    inline-size: min(100%, calc(var(--seed-w) * 1px));
+
+    /* Cap height by sys var and by native seed height */
+    max-block-size: min(var(--disp-max-h), calc(var(--seed-h) * 1px));
 }
 
 img {
@@ -14,4 +41,13 @@ img {
 
 .overlay {
     pointer-events: none;
+}
+
+.stage.clickable {
+    outline: 2px solid transparent;
+    transition: outline-color .15s;
+}
+
+.stage.clickable:hover {
+    outline-color: rgba(0, 150, 136, .6);
 }

@@ -16,7 +16,7 @@ export class CvEdgeApi implements EdgeApi {
     private readonly cv: CV = inject(OPENCV);
     constructor() {
         // just for a quick smoke test; remove later
-        console.debug('OpenCV:', this.cv.getBuildInformation?.().slice(0, 120));
+        console.log('OpenCV:', this.cv.getBuildInformation?.());
     }
 
     private srcMat: any | null = null;   // impl-detail mats

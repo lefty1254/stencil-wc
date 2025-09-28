@@ -1,15 +1,47 @@
-<div class="algo-card">
-    <div class="controls">
-        <label>
-            Low
-            <input type="range" min="0" max="255" [value]="low()" (input)="low.set(+$any($event.target).value)" />
-        </label>
-        <label>
-            High
-            <input type="range" min="0" max="255" [(ngModel)]="high" />
-        </label>
-    </div>
-    @if(outputUrl() ) {
-    <img  [src]="url()" alt="Canny output" />
-    }
-</div>
+@if(img.size()) {
+<mat-card>
+    <mat-card-header><mat-card-title>Canny</mat-card-title></mat-card-header>
+
+    <mat-card-content>
+        <div class="controls">
+            <div class="control">
+                <label class="label" matTooltip="Lower and upper hysteresis thresholds">
+                    Thresholds
+                </label>
+                <mat-slider class="w-100" min="0" max="500" step="1" [discrete]="true" [showTickMarks]="true">
+                    <input matSliderStartThumb [(value)]="low">
+                    <input matSliderEndThumb [(value)]="high">
+                </mat-slider>
+                <div class="hint">{{ low() }} – {{ high() }}</div>
+            </div>
+
+            <div class="control">
+                <label class="label" matTooltip="Post-processing dilation to thicken edges (integer pixels)">
+                    Thickness
+                </label>
+                <mat-slider class="w-100" min="1" max="15" step="1" [discrete]="true">
+                    <input matSliderThumb [(value)]="thickness">
+                </mat-slider>
+                <mat-form-field appearance="outline" class="num">
+                    <input matInput type="number" min="1" max="15" step="1" [(ngModel)]="thickness">
+                </mat-form-field>
+            </div>
+
+            <div class="control">
+                <label class="label" matTooltip="Choose overlay base">
+                    Base
+                </label>
+                <mat-select [(ngModel)]="base">
+                    <mat-option value="none">None (mask only)</mat-option>
+                    <mat-option value="original">Original</mat-option>
+                    <mat-option value="gray">Gray</mat-option>
+                </mat-select>
+            </div>
+        </div>
+
+
+        <edge-display [baseImage]="baseImage()" [mask]="maskRes.hasValue() ? maskRes.value() : null"
+            alt="Canny Overlay" />
+    </mat-card-content>
+</mat-card>
+}

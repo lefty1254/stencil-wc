@@ -1,8 +1,23 @@
-@if(ar()) {
-<div class="stage" [style.aspect-ratio]="ar()">
-    <img class="base" [src]="baseUrl()!" [alt]="alt()" />
+<div class="panel">
     @if(overlayUrl()) {
-    <img class="overlay" [src]="overlayUrl()!" alt="" />
+    <div class="controls">
+        <label class="control">
+            Color {{initialColor()}}
+            <input type="color" [(ngModel)]="initialColor" />
+        </label>
+        <label class="control">
+            Alpha {{alpha()}}
+            <input type="range" min="0" max="255" [(ngModel)]="alpha" />
+        </label>
+    </div>
     }
+
+    <div class="stage" [class.clickable]="!!overlayUrl()">
+        @if(baseUrl()) {
+        <img class="base" [src]="baseUrl()!" [alt]="alt()" />
+        }
+        @if(overlayUrl()) {
+        <img class="overlay" [src]="overlayUrl()!" alt="" />
+        }
+    </div>
 </div>
-}

@@ -34,6 +34,44 @@ body {
   margin: 0;
 }
 /* You can add global styles to this file, and also import other style files */
+.dark-mode {
+  color-scheme: dark;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ----- Global sizing vars (can be overridden later) ----- */
+:root {
+   /* set by ImageStateService on upload */
+  --seed-w: 0; /* raw number (px added where needed) */
+  --seed-h: 0;
+
+  /* dashboard prefs (fallbacks; width/height limits from the VIEW, not fixed pixels) */
+  --disp-min-w: 360px;     /* won't upscale tiny seeds beyond their native width due to clamp below */
+  --disp-max-h: 85vh; 
+}
+
+/* Portrait: use narrower cards and slightly lower height */
+@media (orientation: portrait) {
+  :root{ --disp-max-h: 90vh; }
+}
+
+
+
+/* Basic grid to keep cards tidy (use wherever you list <mat-card>s) */
+.dashboard-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;;
+  align-items: start;
+}
+/* Optional: coarse desktop bump */
+@media (min-width: 1280px) and (orientation: landscape) {
+  .dashboard-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+mat-card {
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
