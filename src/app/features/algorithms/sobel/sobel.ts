@@ -23,7 +23,7 @@ import { ImageStateService } from '../../../core/state/image-state';
 export class Sobel {
   readonly img = inject(ImageStateService);
 
-  readonly ksizes = [1,3,5,7];
+  // readonly ksizes = [1,3,5,7];
   readonly ksize = signal<number>(3);
   readonly scale = signal<number>(1);
   readonly delta = signal<number>(0);

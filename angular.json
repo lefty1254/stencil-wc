@@ -22,6 +22,8 @@
           "options": {
             "browser": "src/main.ts",
             "outputPath": "dist/stencil-wc",
+            "baseHref": "/stencil-wc/",
+            "deployUrl": "/stencil-wc/",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [

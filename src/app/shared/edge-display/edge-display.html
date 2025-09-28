@@ -12,7 +12,7 @@
     </div>
     }
 
-    <div class="stage" [class.clickable]="!!overlayUrl()">
+    <div class="stage" [class.clickable]="!!overlayUrl()" (click)="overlayUrl() && openDialog()">
         @if(baseUrl()) {
         <img class="base" [src]="baseUrl()!" [alt]="alt()" />
         }

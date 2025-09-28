@@ -1,6 +1,8 @@
-import { Component, computed, input, model, signal } from '@angular/core';
+import { Component, computed, inject, input, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { EdgeMask, RGBA } from 'opencv-ng';
+import { MaskDialog } from '../mask-dialog/mask-dialog';
 
 function imageDataToDataURL(img: ImageData | null): string | null {
   if (!img) return null;
@@ -32,7 +34,7 @@ export class EdgeDisplay {
   readonly alt       = input<string>('image');
 
   // Optional initial color (#rrggbb)
-  readonly initialColor = model<string>('#ff0202ff');
+  readonly initialColor = model<string>('#f50000');
 
   // Internal color/alpha signals
   readonly color = computed(()=>this.hexToRgb(this.initialColor()));
@@ -52,6 +54,22 @@ export class EdgeDisplay {
     const h = hex.startsWith('#') ? hex.slice(1) : hex;
     return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
   }
-  
+  private dialog = inject(MatDialog)
+  openDialog() {
+    const m = this.mask();
+    if (!m) return;
+    const [r,g,b] = this.color();
+    const a = this.alpha();
+    this.dialog.open(MaskDialog, {
+      data: { 
+        mask: m,
+        color: [r,g,b],
+        alpha : a,
+        filename: 'edge-mask.png'
+      },
+      width : 'min(95vw, 1100px)',
+      autoFocus: false
+    });
+  }
 
 }

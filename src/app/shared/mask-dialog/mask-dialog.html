@@ -1,0 +1,12 @@
+<div class="wrap">
+    <div class="preview">
+        <img [src]="pngUrl()" alt="Edge Mask" />
+    </div>
+
+    <div class="actions">
+        <a [href]="pngUrl()" [attr.download]="fileName">
+            <button mat-raised-button color="primary">Download mask</button>
+        </a>
+        <button mat-stroked-button (click)="close()">Close</button>
+    </div>
+</div>
